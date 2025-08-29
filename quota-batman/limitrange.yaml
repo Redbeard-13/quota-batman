@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: batman-defaults
+spec:
+  limits:
+    - type: Container
+      # Значения по умолчанию, если в поде/контейнере не указали requests/limits
+      defaultRequest:
+        cpu: "500m"
+        memory: "512Mi"
+      default:
+        cpu: "1"
+        memory: "1Gi"
+
+      # Пер-объектные потолки, чтобы одна ВМ не «съела всё»
+      max:
+        cpu: "2"
+        memory: "2Gi"
